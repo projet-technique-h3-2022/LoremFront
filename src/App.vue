@@ -1,13 +1,16 @@
 <script setup>
-
+import NavBar from "@/components/Navbar.vue";
+import "bootstrap";
 </script>
 
 <template>
-  <h1>coucou</h1>
-
-  <!-- <RouterView /> -->
+  <NavBar />
+  <div class="container-fluid mt-3">
+    <!-- <router-view /> -->
+  </div>
 </template>
 
 <style>
-
+@import "bootstrap/dist/css/bootstrap.min.css";
 </style>
+
