@@ -1,9 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import HomeView from '../views/HomeView.vue'
+import Signup from '@/pages/Signup.vue'
+import Login from '@/pages/Login.vue'
 
 const router = createRouter({
   history: createWebHistory(),
-  routes: []
+  routes: [
+    {
+      path: "/signup",
+      name: "signup",
+      component: Signup,
+    },
+  ]
 })
 
 export default router
