@@ -3,7 +3,7 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <router-link class="navbar-brand">
+      <router-link to="/" class="navbar-brand">
         Lorem
       </router-link>
       <button
@@ -19,16 +19,16 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-           <router-link class="nav-link">
+           <router-link to="/" class="nav-link">
               Groupes
             </router-link>
         </ul>
 
-				<router-link class="btn btn-info me-1">
+				<router-link to="/" class="btn btn-info me-1">
           Inscription
         </router-link>
 
-        <router-link class="btn btn-primary">
+        <router-link to="/" class="btn btn-primary">
           Connexion
         </router-link>
 
