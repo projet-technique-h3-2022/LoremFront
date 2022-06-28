@@ -142,7 +142,7 @@ async function sendForm(){
 			role: form.value.role.value
 		}
 		form.value.response = await signup(data)
-		if(form.value.response.email) router.push({ name: "login" });
+		if(form.value.response.email) router.push({ name: "signup" });
 	}
 }
 
@@ -177,6 +177,7 @@ function resetForm(){
 							:class="{ 'is-valid': form.lastname.valid ,'is-invalid': form.lastname.error }" 
 							@focusout="checkForm('lastname', 2, 50)" 
 							v-model="form.lastname.value" 
+							data-input="lastname"
 							required />
 	
 						<div class="invalid-feedback" v-show="form.lastname.error">
@@ -193,6 +194,7 @@ function resetForm(){
 							:class="{ 'is-valid': form.firstname.valid ,'is-invalid': form.firstname.error }" 
 							@focusout="checkForm('firstname', 2, 50)" 
 							v-model="form.firstname.value" 
+							data-input="firstname"
 							required />
 							
 						<div class="invalid-feedback" v-show="form.firstname.error">
@@ -209,6 +211,7 @@ function resetForm(){
 							:class="{ 'is-valid': form.email.valid ,'is-invalid': form.email.error }" 
 							@focusout="checkForm('email')" 
 							v-model="form.email.value" 
+							data-input="email"
 							required />
 							
 						<div class="invalid-feedback" v-show="form.email.error">
@@ -224,7 +227,8 @@ function resetForm(){
 							class="form-control" 
 							:class="{ 'is-valid': form.password.valid ,'is-invalid': form.password.error }" 
 							@focusout="checkForm('password', 6, 255)" 
-							v-model="form.password.value" 
+							v-model="form.password.value"
+							data-input="password"
 							required />
 							
 						<div class="invalid-feedback" v-show="form.password.error">
@@ -233,7 +237,7 @@ function resetForm(){
 					</div>
 	
 					<div class="col-12 mt-3">
-						<label class="form-label">Pepeat password</label>
+						<label class="form-label">Repeat password</label>
 	
 						<input 
 							type="password" 
@@ -241,6 +245,7 @@ function resetForm(){
 							:class="{ 'is-valid': form.repeatPassword.valid ,'is-invalid': form.repeatPassword.error }" 
 							@focusout="checkForm('repeatPassword')" 
 							v-model="form.repeatPassword.value" 
+							data-input="repeatPassword"
 							required />
 							
 						<div class="invalid-feedback" v-show="form.repeatPassword.error">
@@ -254,7 +259,8 @@ function resetForm(){
 								<button 
 									class="btn w-100"
 									:class="{'btn-outline-dark': (form.role.value == '' || form.role.value == 'editor') && !form.role.error, 'btn-success': form.role.value == 'author', 'btn-outline-danger': form.role.error }" 
-									@click="form.role.value = 'author'; checkForm('role')">
+									@click="form.role.value = 'author'; checkForm('role')"
+									data-btn="btnAuthor">
 									Author
 								</button>
 							</div>
@@ -262,7 +268,8 @@ function resetForm(){
 								<button 
 									class="btn w-100"
 									:class="{'btn-outline-dark': (form.role.value == '' || form.role.value == 'author') && !form.role.error, 'btn-success': form.role.value == 'editor', 'btn-outline-danger': form.role.error }"
-									@click="form.role.value = 'editor'; checkForm('role')">
+									@click="form.role.value = 'editor'; checkForm('role')"
+									data-btn="btnEditor">
 									Editor
 								</button>
 							</div>
@@ -279,11 +286,11 @@ function resetForm(){
 					</div>
 
 					<div class="col-3 text-start mt-3">
-						<button class="btn btn-secondary" @click="resetForm()">Reset</button>
+						<button class="btn btn-secondary" @click="resetForm()" data-btn="btnReset">Reset</button>
 					</div>
 					
 					<div class="col-3 text-end mt-3">
-						<button class="btn btn-primary" @click="sendForm()">Signin</button>
+						<button class="btn btn-primary" @click="sendForm()" data-btn="btnSignup">Signup</button>
 					</div>
 				</div>
 
