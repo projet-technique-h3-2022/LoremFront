@@ -1,10 +1,16 @@
+<script setup>
+import { useUserStore } from "@/services/UserStore";
+const { user } = useUserStore();
+</script>
+
 <template>
     <div class="UserMenu col-md-3 leftContent">
         <h3>Menu utilisateur</h3>
         <ul>
-            <li>Mon compte</li>
-            <li>Mes articles</li>
-            <li>Demande de publication</li>
+            <li @click="$emit('changeView', 0)">My informations</li>
+            <li @click="$emit('changeView', 1)" v-show="user.role == 'author'">My articles</li>
+            <li @click="$emit('changeView', 1)" v-show="user.role == 'editor'">My groups</li>
+            <li @click="$emit('changeView', 2)">Publication requests</li>
         </ul>
         <div class="separator"></div>
     </div>

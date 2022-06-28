@@ -1,18 +1,24 @@
 <script setup>
+import { ref } from "vue";
+import UserInfo from "@/components/UserInfo.vue"
 import UserMenuVue from '../components/UserMenu.vue';
+import { useUserStore } from "@/services/UserStore";
+
+const { user } = useUserStore();
+const view = ref(0);
+
+function changeView(n) { view.value = n }
+
 </script>
 
 <template>
     <div class="MyAccount">
         <div class="row mt-5 ms-3">
-            <UserMenuVue />
+            <UserMenuVue @change-view="changeView"/>
             <div class="col-md-7 ms-5">
-                <h3>Mon compte</h3>
-                <div class="row ms-5">
-                    <div class="userLastame">Prénom : John</div>
-                    <div class="userFirstame">Nom : Doe</div>
-                    <div class="userEmail">Email : JohnDoe@mail.com</div>
-                </div>
+
+                <UserInfo v-if="view == 0"/>
+
             </div>
         </div>
     </div>
