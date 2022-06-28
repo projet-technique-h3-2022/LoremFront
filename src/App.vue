@@ -6,7 +6,7 @@ import "bootstrap";
 <template>
   <NavBar />
   <div class="container-fluid mt-3">
-    <!-- <router-view /> -->
+    <router-view />
   </div>
 </template>
 
