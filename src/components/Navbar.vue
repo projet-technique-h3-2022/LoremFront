@@ -1,9 +1,19 @@
-<script setup></script>
+<script setup>
+  import { useUserStore } from "@/services/UserStore";
+  import router from "@/router";
+
+  const { user, logout } = useUserStore();
+
+  function logoutUser() {
+    logout();
+    router.push({ name: "homepage" });
+  }
+</script>
 
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <router-link to="/" class="navbar-brand">
+      <router-link :to="{ name: 'homepage' }" class="navbar-brand" >
         Lorem
       </router-link>
       <button
@@ -19,18 +29,26 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <router-link to="/" class="nav-link">
+          <router-link to="/" class="nav-link" >
             Groupes
           </router-link>
         </ul>
 
-				<router-link :to="{ name: 'signup' }" class="btn btn-info me-1">
+				<router-link v-if="!user" :to="{ name: 'signup' }" class="btn btn-info me-1">
           Signup
         </router-link>
 
-        <router-link :to="{ name: 'signup' }" class="btn btn-primary">
+        <router-link v-if="!user" :to="{ name: 'login' }" class="btn btn-primary">
           Login
         </router-link>
+
+        <router-link v-if="user" :to="{ name: 'myAccount' }" class="btn btn-primary me-1">
+          My Account
+        </router-link>
+
+        <button v-if="user" class="btn btn-danger" @click="logoutUser()">
+          Deconnexion
+        </button>
 
       </div>
     </div>

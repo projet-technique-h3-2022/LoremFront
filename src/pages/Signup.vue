@@ -115,6 +115,7 @@ function checkForm(type = "", min = 0, max = 0){
 	}
 	else if(type === "role"){
 		if(elem.value === ""){
+			error = true
 			elem.error = true;
 			elem.error_message = "Select a role"
 			
@@ -142,7 +143,7 @@ async function sendForm(){
 			role: form.value.role.value
 		}
 		form.value.response = await signup(data)
-		if(form.value.response.email) router.push({ name: "signup" });
+		if(form.value.response.email) router.push({ name: "login" });
 	}
 }
 
@@ -279,10 +280,12 @@ function resetForm(){
 						</div>
 					</div>
 
-					<div class="col-12 alert alert-danger mt-3" v-show="form.response != ''">
+					<div class="col-12 mt-4" v-show="form.response != ''">
+						<div class="alert alert-danger">
 							<ul class="m-0">
 								<li>{{form.response}}</li>
 							</ul>
+						</div>
 					</div>
 
 					<div class="col-3 text-start mt-3">
