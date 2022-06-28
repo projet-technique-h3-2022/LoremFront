@@ -3,6 +3,10 @@ import { ref } from "vue";
 import UserInfo from "@/components/UserInfo.vue"
 import UserMenuVue from '../components/UserMenu.vue';
 import { useUserStore } from "@/services/UserStore";
+import MyRequestVue from "../components/MyRequest.vue";
+import MyGroupsVue from "../components/MyGroups.vue";
+import MyArticlesVue from "../components/MyArticles.vue";
+
 
 const { user } = useUserStore();
 const view = ref(0);
@@ -18,6 +22,10 @@ function changeView(n) { view.value = n }
             <div class="col-md-7 ms-5">
 
                 <UserInfo v-if="view == 0"/>
+                <MyArticlesVue v-if="view == 1" />
+                <MyGroupsVue v-if="view == 2"/>
+                <MyRequestVue v-if="view == 3" />
+                <!-- <MyRequestVue v-if="view == 4" /> --> <!-- request pour editor -->
 
             </div>
         </div>

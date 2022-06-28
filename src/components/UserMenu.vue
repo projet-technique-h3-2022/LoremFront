@@ -9,8 +9,9 @@ const { user } = useUserStore();
         <ul>
             <li @click="$emit('changeView', 0)">My informations</li>
             <li @click="$emit('changeView', 1)" v-show="user.role == 'author'">My articles</li>
-            <li @click="$emit('changeView', 1)" v-show="user.role == 'editor'">My groups</li>
-            <li @click="$emit('changeView', 2)">Publication requests</li>
+            <li @click="$emit('changeView', 2)" v-show="user.role == 'editor'">My groups</li>
+            <li @click="$emit('changeView', 3)" v-show="user.role == 'author'">Publication requests</li>
+            <li @click="$emit('changeView', 4)" v-show="user.role == 'editor'">Publication requests</li>
         </ul>
         <div class="separator"></div>
     </div>
