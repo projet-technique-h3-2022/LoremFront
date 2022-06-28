@@ -4,6 +4,7 @@ import Signup from '@/pages/Signup.vue'
 import HomePage from '../pages/HomePage.vue'
 import ReadArticle from '../pages/ReadArticle.vue'
 import MyAccount from '../pages/MyAccount.vue'
+import MyArticles from '../pages/MyArticles.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -27,6 +28,11 @@ const router = createRouter({
       path: "/myAccount",
       name: 'myAccount',
       component: MyAccount,
+    },
+    {
+      path: "/myArticles",
+      name: 'myArticles',
+      component: MyArticles,
     },
   ]
 })
