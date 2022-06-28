@@ -1,5 +1,7 @@
 <script setup>
 import { ref } from "vue";
+import router from "@/router";
+import { signup } from "@/services/authentication/Signup.js";
 
 const form = ref({
 	lastname: {
@@ -36,7 +38,8 @@ const form = ref({
 		value: "",
 		error: false,
 		error_message: "",
-	}
+	},
+	response: ""
 })
 
 const saveForm = JSON.parse(JSON.stringify(form.value));
@@ -122,7 +125,7 @@ function checkForm(type = "", min = 0, max = 0){
 	return !error;
 }
 
-function sendForm(){
+async function sendForm(){
 	let checkLastName = checkForm('lastname', 2, 50)
 	let checkFirstName = checkForm('firstname', 2, 50)
 	let checkEmail = checkForm('email')
@@ -131,14 +134,15 @@ function sendForm(){
 	let checkRole = checkForm('role')
 
 	if(	checkLastName && checkFirstName && checkEmail && checkPw && checkRpw && checkRole ){
-		let obj = {
+		let data = {
 			firstname: form.value.firstname.value,
 			lastname: form.value.lastname.value,
 			email: form.value.email.value,
 			password: form.value.password.value,
 			role: form.value.role.value
 		}
-		console.log(obj);
+		form.value.response = await signup(data)
+		if(form.value.response.email) router.push({ name: "login" });
 	}
 }
 
@@ -244,7 +248,7 @@ function resetForm(){
 						</div>
 					</div>
 
-					<div class="col-12 mt-5">
+					<div class="col-12 mt-4">
 						<div class="row justify-content-around">
 							<div class="col-4 text-center">
 								<button 
@@ -266,6 +270,12 @@ function resetForm(){
 								{{form.role.error_message}}
 							</div>
 						</div>
+					</div>
+
+					<div class="col-12 alert alert-danger mt-3" v-show="form.response != ''">
+							<ul class="m-0">
+								<li>{{form.response}}</li>
+							</ul>
 					</div>
 
 					<div class="col-3 text-start mt-3">
