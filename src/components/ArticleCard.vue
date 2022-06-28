@@ -3,6 +3,7 @@ import { ref } from "@vue/reactivity";
 
 // 'img' props can be null, and an image from picsum will be taken
 defineProps({
+    articleId: Number,
     title: String,
     desc: String,
     img: String,
