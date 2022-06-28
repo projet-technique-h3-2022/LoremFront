@@ -8,6 +8,7 @@ function UserLogin(data) {
 		lastname: data.lastname,
 		firstname: data.firstname,
 		email: data.email,
+    role: data.role,
 		token: data.token,
 	}
   localStorage.setItem("user", JSON.stringify(user.value));
