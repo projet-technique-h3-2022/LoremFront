@@ -14,11 +14,16 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
+      path: "/",
+      name: 'homepage',
+      component: HomePage,
+    },
+    {
       path: "/signup",
       name: "signup",
       component: Signup,
       beforeEnter: function () {
-        if (user.value) return { name: "accueil" };
+        if (user.value) return { name: "homepage" };
       },
     },
     {
@@ -26,13 +31,8 @@ const router = createRouter({
       name: "login",
       component: Login,
       beforeEnter: function () {
-        if (user.value) return { name: "accueil" };
+        if (user.value) return { name: "homepage" };
       },
-    },
-    {
-      path: "/",
-      name: 'homepage',
-      component: HomePage,
     },
     {
       path: "/readArticle/:id",
@@ -43,6 +43,9 @@ const router = createRouter({
       path: "/myAccount",
       name: 'myAccount',
       component: MyAccount,
+      beforeEnter: function () {
+        if (!user.value) return { name: "homepage" };
+      },
     },
     {
       path: "/myArticles",
