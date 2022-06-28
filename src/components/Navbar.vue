@@ -11,7 +11,7 @@
 </script>
 
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
       <router-link :to="{ name: 'homepage' }" class="navbar-brand" >
         Lorem
@@ -29,9 +29,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <router-link to="/" class="nav-link" >
-            Groupes
-          </router-link>
         </ul>
 
 				<router-link v-if="!user" :to="{ name: 'signup' }" class="btn btn-info me-1">
