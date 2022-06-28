@@ -4,7 +4,7 @@ import UserMenuVue from '../components/UserMenu.vue';
 
 <template>
     <div class="MyAccount">
-        <div class="row mainRow">
+        <div class="row mt-5 ms-3">
             <UserMenuVue />
             <div class="col-md-7 ms-5">
                 <h3>Mon compte</h3>
