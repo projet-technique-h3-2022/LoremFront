@@ -32,6 +32,11 @@ const form = ref({
 		error: false,
 		error_message: "",
 	},
+	role: {
+		value: "",
+		error: false,
+		error_message: "",
+	}
 })
 
 const saveForm = JSON.parse(JSON.stringify(form.value));
@@ -54,7 +59,8 @@ function checkForm(type = "", min = 0, max = 0){
 		str = "The password"
 	}
 	if(type === "email") elem = form.value.email
-	if(type === "repeatPassword")elem = form.value.repeatPassword
+	if(type === "repeatPassword") elem = form.value.repeatPassword
+	if(type === "role") elem = form.value.role
 
 	if(type.match(/^(lastname|firstname|password)$/)){
 			if(elem.value.length < min){
@@ -93,40 +99,51 @@ function checkForm(type = "", min = 0, max = 0){
 		}
 	}
 	else if(type === "repeatPassword"){
-		if(form.value.password.value !== elem.value){
+		if(form.value.password.value !== elem.value || elem.value === ""){
 			error = true
 			elem.valid = false
 			elem.error = true
-			elem.error_message = `Passwords must be identical`
+			elem.error_message = `Passwords must be identical and not empty`
 		}
 		else{
 			elem.valid = true
 			elem.error = false
 		}
 	}
+	else if(type === "role"){
+		if(elem.value === ""){
+			elem.error = true;
+			elem.error_message = "Select a role"
+			
+		} 
+		else elem.error = false;
+	}
 
 	return !error;
 }
 
 function sendForm(){
-	if(checkForm('lastname', 2, 50) && 
-		 checkForm('firstname', 2, 50) && 
-		 checkForm('email') &&
-		 checkForm('password', 6, 255) &&
-		 checkForm('repeatPassword')
-	){
+	let checkLastName = checkForm('lastname', 2, 50)
+	let checkFirstName = checkForm('firstname', 2, 50)
+	let checkEmail = checkForm('email')
+	let checkPw = checkForm('password', 6, 255)
+	let checkRpw = checkForm('repeatPassword')
+	let checkRole = checkForm('role')
+
+	if(	checkLastName && checkFirstName && checkEmail && checkPw && checkRpw && checkRole ){
 		let obj = {
 			firstname: form.value.firstname.value,
 			lastname: form.value.lastname.value,
 			email: form.value.email.value,
-			password: form.value.password.value
+			password: form.value.password.value,
+			role: form.value.role.value
 		}
 		console.log(obj);
 	}
 }
 
 function resetForm(){
-	form.value = saveForm;
+	form.value = JSON.parse(JSON.stringify(saveForm));
 }
 
 </script>
@@ -224,6 +241,30 @@ function resetForm(){
 							
 						<div class="invalid-feedback" v-show="form.repeatPassword.error">
 							{{form.repeatPassword.error_message}}
+						</div>
+					</div>
+
+					<div class="col-12 mt-5">
+						<div class="row justify-content-around">
+							<div class="col-4 text-center">
+								<button 
+									class="btn w-100"
+									:class="{'btn-outline-dark': (form.role.value == '' || form.role.value == 'editor') && !form.role.error, 'btn-success': form.role.value == 'author', 'btn-outline-danger': form.role.error }" 
+									@click="form.role.value = 'author'; checkForm('role')">
+									Author
+								</button>
+							</div>
+							<div class="col-4 text-center">
+								<button 
+									class="btn w-100"
+									:class="{'btn-outline-dark': (form.role.value == '' || form.role.value == 'author') && !form.role.error, 'btn-success': form.role.value == 'editor', 'btn-outline-danger': form.role.error }"
+									@click="form.role.value = 'editor'; checkForm('role')">
+									Editor
+								</button>
+							</div>
+							<div class="text-danger text-center" v-show="form.role.error">
+								{{form.role.error_message}}
+							</div>
 						</div>
 					</div>
 
