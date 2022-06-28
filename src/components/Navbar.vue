@@ -44,7 +44,7 @@
         </router-link>
 
         <button v-if="user" class="btn btn-danger" @click="logoutUser()">
-          Deconnexion
+          Logout
         </button>
 
       </div>

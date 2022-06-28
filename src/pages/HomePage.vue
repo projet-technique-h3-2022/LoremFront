@@ -17,7 +17,7 @@ const articles = ref([
     <div class="HomePage">
         <div class="row justify-content-center">
             <div class="col-md-11">
-                <h1>Articles publiés récemment</h1>
+                <h1>Last published articles</h1>
                 <hr>
             </div>
         </div>
