@@ -1,5 +1,6 @@
 <script setup>
 import NavBar from "@/components/Navbar.vue";
+import "@/services/interceptor"
 import "bootstrap";
 </script>
 
