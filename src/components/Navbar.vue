@@ -28,7 +28,7 @@
           Signup
         </router-link>
 
-        <router-link to="/" class="btn btn-primary">
+        <router-link :to="{ name: 'signup' }" class="btn btn-primary">
           Login
         </router-link>
 
