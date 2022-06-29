@@ -7,7 +7,15 @@ export async function postArticle(article) {
       image: article.image,
       content: article.content,
     });
-    console.log(result)
+  } catch (err) {
+    return err.response.data.error;
+  }
+}
+
+export async function getArticlesByAuthor() {
+  try {
+    const result = await axios.get(import.meta.env.VITE_URL_API + "/user/articles");
+    return result.data
   } catch (err) {
     return err.response.data.error;
   }
