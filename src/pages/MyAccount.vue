@@ -12,11 +12,14 @@ import AddEditArticleVue from "../components/AddEditArticle.vue";
 
 const { user } = useUserStore();
 const view = ref(0);
+const articleId = ref("")
 
 function changeView(n) { view.value = n }
 
-function addArticle() {
+const addArticle = () => view.value = 5
+const editArticle = (id) => {
     view.value = 5
+    articleId.value = id
 }
 
 </script>
@@ -28,12 +31,12 @@ function addArticle() {
             <div class="col-md-7 ms-5">
 
                 <UserInfo v-if="view == 0"/>
-                <MyArticlesVue v-if="view == 1" @add-article="addArticle" />
+                <MyArticlesVue v-if="view == 1" @add-article="addArticle" @edit-article="editArticle" />
                 <MyGroupsVue v-if="view == 2"/>
                 <MyRequestVue v-if="view == 3" />
                 <EditorPublicationRequest v-if="view == 4" /> <!-- request pour editor -->
                 <!-- <MyRequestVue v-if="view == 4" /> --> <!-- request pour editor -->
-                <AddEditArticleVue v-if="view == 5" @article-added="view = 1" />
+                <AddEditArticleVue v-if="view == 5" @article-added="view = 1" :articleId="articleId" />
 
             </div>
         </div>

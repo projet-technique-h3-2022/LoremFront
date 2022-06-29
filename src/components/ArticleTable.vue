@@ -22,10 +22,10 @@ const props = defineProps({
                 <tr v-for="(row, i) in rows" :key="i">
                     <td v-for="(head, i) in headList" :key="i">{{row[head.id]}}</td>
                     <td class="text-end col-4" v-if="row.actions">
-                        <button v-if="row.actions.includes('add')" class="btn btn-success ms-1">Ajouter</button>                    
-                        <button v-if="row.actions.includes('edit')" class="btn btn-primary ms-1">Editer</button>                    
-                        <button v-if="row.actions.includes('publish')" class="btn btn-success ms-1">Publier</button>                    
-                        <button v-if="row.actions.includes('delete')" class="btn btn-danger ms-1">Supprimer</button>                    
+                        <button v-if="row.actions.includes('add')" @click="$emit('add', row.id)" class="btn btn-success ms-1">Ajouter</button>                    
+                        <button v-if="row.actions.includes('edit')" @click="$emit('edit', row.id)" class="btn btn-primary ms-1">Editer</button>                    
+                        <button v-if="row.actions.includes('publish')" @click="$emit('publish', row.id)" class="btn btn-success ms-1">Publier</button>                    
+                        <button v-if="row.actions.includes('delete')" @click="$emit('delete', row.id)" class="btn btn-danger ms-1">Supprimer</button>                    
                     </td>
                 </tr>
             </tbody>

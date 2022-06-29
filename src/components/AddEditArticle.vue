@@ -1,8 +1,8 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import router from "@/router";
 import UserMenuVue from '../components/UserMenu.vue';
-import { postArticle } from '../services/article/article'
+import { postArticle, getArticleById, putArticle } from '../services/article/article'
 
 const props = defineProps({
     articleId: {
@@ -38,12 +38,21 @@ const checkForm = () => {
 
 const verb = ref(props.articleId ? "Editer" : "Créer")
 
-const saveArticle = () => {
+const saveArticle = async () => {
     if(!checkForm()) return
     errorMsg.value = []
-    postArticle({title: title.value, image: image.value, content: content.value})
+    if(props.articleId == undefined) await postArticle({title: title.value, image: image.value, content: content.value})
+    else await putArticle({id: props.articleId, title: title.value, image: image.value, content: content.value})
     emit('articleAdded')
 }
+
+onMounted(async () => {
+    if(props.articleId == undefined) return
+    const articleContent = await getArticleById(props.articleId)
+    title.value = articleContent.title
+    image.value = articleContent.image
+    content.value = articleContent.content
+})
 </script>
 
 <template>
