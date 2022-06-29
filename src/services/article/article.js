@@ -41,3 +41,11 @@ export async function putArticle(article) {
         return err.response.data.error;
     }
 }
+
+export async function deleteArticleById(id) {
+    try {
+        const result = await axios.delete(import.meta.env.VITE_URL_API + "/article/" + id);
+    } catch (err) {
+        return err.response.data.error;
+    }
+}

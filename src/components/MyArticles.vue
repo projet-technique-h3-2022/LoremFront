@@ -1,7 +1,7 @@
 <script setup>
 import UserMenuVue from '../components/UserMenu.vue';
 import ArticleTableVue from '../components/ArticleTable.vue';
-import { getArticlesByAuthor } from '../services/article/article'
+import { getArticlesByAuthor, deleteArticleById } from '../services/article/article'
 import { onMounted, onUnmounted, ref } from 'vue';
 
 const emit = defineEmits(['editArticle'])
@@ -34,6 +34,11 @@ onMounted(async () => {
 })
 
 const editArticle = (ev) => emit('editArticle', ev)
+
+const deleteArticle = async (id) => {
+    await deleteArticleById(id)
+    rows.value = rows.value.filter(item => item.id != id)
+}
 </script>
 
 <template>
@@ -41,7 +46,7 @@ const editArticle = (ev) => emit('editArticle', ev)
         <div class="col-md-12">
             <h1>My articles</h1>
             <button class="btn btn-primary mt-3" @click="$emit('addArticle')">Add an article</button>
-            <ArticleTableVue @edit="editArticle" class="mt-5" :headList="headList" :rows="rows" />
+            <ArticleTableVue @edit="editArticle" @delete="deleteArticle" class="mt-5" :headList="headList" :rows="rows" />
         </div>
     </div>
 </template>
