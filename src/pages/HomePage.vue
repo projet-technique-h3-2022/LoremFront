@@ -1,15 +1,19 @@
 <script setup>
-import { ref } from "@vue/reactivity";
-import ArticleCardVue from "../components/ArticleCard.vue";
+import { ref, computed } from "@vue/reactivity";
+import ArticleCardVue from "@/components/ArticleCard.vue";
+import { getPublishedArticles } from "@/services/article/article" 
 
-const articles = ref([
-    {id: 0, title: "Lorem", desc: "Ispuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuum"},
-    {id: 1, title: "Lorem", desc: "Ispuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuum", img: "https://picsum.photos/400/400"},
-    {id: 2, title: "Lorem", desc: "Ispuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuum"},
-    {id: 3, title: "Lorem", desc: "Ispuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuum"},
-    {id: 4, title: "Lorem", desc: "Ispuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuum", img: "https://picsum.photos/400/400"},
-    {id: 5, title: "Lorem", desc: "Ispuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuum"},
-])
+const articles = ref([])
+
+async function getData(){
+    articles.value = await getPublishedArticles()
+}
+
+const filteredArticles = computed(() => {
+  return articles.value.filter((art) => art.published === 'published');
+});
+
+getData();
 
 </script>
 
@@ -21,12 +25,16 @@ const articles = ref([
                 <hr>
             </div>
         </div>
-        <div class="row justify-content-center mx-5">
-            <div class="col-md-6" v-for="(article, i) in articles" :key="i">
-            <router-link style="text-decoration: none; color: inherit;" :to="`/readArticle/${article.id}`">
-                <ArticleCardVue :articleId="article.id" :title="article.title" :desc="article.desc" :img="article.img" />                
+        <div class="row justify-content-center mx-5" v-show="filteredArticles.length > 0">
+            <div class="col-md-6" v-for="(article, i) in filteredArticles" :key="i">
+            <router-link style="text-decoration: none; color: inherit;" :to="`/readArticle/${article._id}`">
+                <ArticleCardVue :article="article" />                
             </router-link>
             </div>
+        </div>
+
+        <div class="row justify-content-center mx-5 pt-5 text-center"  v-show="filteredArticles.length == 0">
+            <h3>There are no articles published at the moment.</h3>
         </div>
     </div>
 </template>
