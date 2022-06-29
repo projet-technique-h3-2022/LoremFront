@@ -6,6 +6,7 @@ import { useUserStore } from "@/services/UserStore";
 import MyRequestVue from "../components/MyRequest.vue";
 import MyGroupsVue from "../components/MyGroups.vue";
 import MyArticlesVue from "../components/MyArticles.vue";
+import EditorPublicationRequest from "../components/EditorPublicationRequest.vue";
 
 
 const { user } = useUserStore();
@@ -25,7 +26,7 @@ function changeView(n) { view.value = n }
                 <MyArticlesVue v-if="view == 1" />
                 <MyGroupsVue v-if="view == 2"/>
                 <MyRequestVue v-if="view == 3" />
-                <!-- <MyRequestVue v-if="view == 4" /> --> <!-- request pour editor -->
+                <EditorPublicationRequest v-if="view == 4" /> <!-- request pour editor -->
 
             </div>
         </div>
