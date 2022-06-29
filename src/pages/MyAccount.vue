@@ -30,15 +30,14 @@ const editArticle = (id) => {
 <template>
     <div class="MyAccount">
         <div class="row mt-5 ms-3">
-            <UserMenuVue @change-view="changeView"/>
+            <UserMenuVue @change-view="changeView" :view="view"/>
             <div class="col-md-7 ms-5">
 
                 <UserInfo v-if="view == 0"/>
                 <MyArticlesVue v-if="view == 1" @add-article="addArticle" @edit-article="editArticle" />
                 <MyGroupsVue v-if="view == 2"/>
                 <MyRequestVue v-if="view == 3" />
-                <EditorPublicationRequest v-if="view == 4" /> <!-- request pour editor -->
-                <!-- <MyRequestVue v-if="view == 4" /> --> <!-- request pour editor -->
+                <EditorPublicationRequest v-if="view == 4" />
                 <AddEditArticleVue v-if="view == 5" @article-added="view = 1" :articleId="articleId" />
 
             </div>

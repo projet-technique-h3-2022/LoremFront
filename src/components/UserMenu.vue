@@ -1,17 +1,21 @@
 <script setup>
 import { useUserStore } from "@/services/UserStore";
 const { user } = useUserStore();
+
+const props = defineProps({
+    view: Number
+})
 </script>
 
 <template>
     <div class="UserMenu col-md-3 leftContent">
         <h3>Menu utilisateur</h3>
         <ul class="mt-5 noselect">
-            <li @click="$emit('changeView', 0)" class="listBtn">My informations</li>
-            <li @click="$emit('changeView', 1)" v-show="user.role == 'author'" class="listBtn">My articles</li>
-            <li @click="$emit('changeView', 2)" v-show="user.role == 'editor'" class="listBtn">My groups</li>
-            <li @click="$emit('changeView', 3)" v-show="user.role == 'author'" class="listBtn">Publication requests</li>
-            <li @click="$emit('changeView', 4)" v-show="user.role == 'editor'" class="listBtn">Publication requests</li>
+            <li @click="$emit('changeView', 0)" :class="['listBtn', {active: view == 0}]">My informations</li>
+            <li @click="$emit('changeView', 1)" v-show="user.role == 'author'" :class="['listBtn', {active: view == 1}]">My articles</li>
+            <li @click="$emit('changeView', 2)" v-show="user.role == 'editor'" :class="['listBtn', {active: view == 2}]">My groups</li>
+            <li @click="$emit('changeView', 3)" v-show="user.role == 'author'" :class="['listBtn', {active: view == 3}]">Publication requests</li>
+            <li @click="$emit('changeView', 4)" v-show="user.role == 'editor'" :class="['listBtn', {active: view == 4}]">Publication requests</li>
         </ul>
         <div class="separator"></div>
     </div>
@@ -36,6 +40,11 @@ li {
 }
 .listBtn:hover {
     color: palevioletred;
+}
+
+.active {
+    color: pink;
+    font-weight: bold;
 }
 
 .leftContent {
