@@ -1,7 +1,6 @@
 import axios from "axios";
-// import { useUserStore } from "@/services/UserStore";
-// const { user } = useUserStore();
 
+// Return the list of group owned by the user
 async function getUserGroup() {
   try {
     const result = await axios.get(import.meta.env.VITE_URL_API + "/group/editor");
@@ -11,6 +10,7 @@ async function getUserGroup() {
   }
 }
 
+// Add new group to the user
 async function addUserGroup(form) {
   try {
     const result = await axios.post(import.meta.env.VITE_URL_API + "/group", {
@@ -22,30 +22,29 @@ async function addUserGroup(form) {
   }
 }
 
+// Update a group owned by the user
 async function updateUserGroup(form) {
-	console.log(form)
-	// try {
-  //   const result = await axios.put(import.meta.env.VITE_URL_API + "/group/" + form.id, {
-  //   	title: form.title
-  //   });
-  //   return result.data;
-  // } catch (err) {
-  //   return err.response.data.error;
-  // }
+	try {
+    const result = await axios.put(import.meta.env.VITE_URL_API + "/group/" + form.id, {
+    	title: form.title
+    });
+    return result.data;
+  } catch (err) {
+    return err.response.data.error;
+  }
 }
 
+// Delete a group owned by the user
 async function deleteUserGroup(groupId) {
-	console.log(groupId)
-	// try {
-  //   const result = await axios.delete(import.meta.env.VITE_URL_API + "/group/" + groupId);
-  //   return result.data;
-  // } catch (err) {
-  //   return err.response.data.error;
-  // }
+	try {
+    const result = await axios.delete(import.meta.env.VITE_URL_API + "/group/" + groupId);
+    return result.data;
+  } catch (err) {
+    return err.response.data.error;
+  }
 }
 
-
-
+// Export all functions
 export function useGroups() {
   return {
     getUserGroup,
