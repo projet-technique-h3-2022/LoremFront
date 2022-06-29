@@ -8,17 +8,19 @@ const requests = ref([
 	{id: 0, article: {id: 0, title: "test"}, group: {title: "test"}, requested_at: '0000-00-00'}
 ]);
 
+const response = ref({});
+
 async function getData(){
 	// requests.value = await getUserEditorPubReq();
 }
 
 async function accept(requestId){
-	// await editorAcceptPubReq(requestId)
+	// response.value = await editorAcceptPubReq(requestId)
 	getData()
 }
 
 async function refuse(requestId){
-	// await editorRefusePubReq(requestId)
+	// response.value = await editorRefusePubReq(requestId)
 	getData()
 }
 
@@ -50,10 +52,10 @@ getData();
 							</td>
 							<td>{{r.requested_at}}</td>
 							<td>
-								<button class="btn btn-success" @click="accept(r.id)">Accept</button>
+								<button class="btn btn-success" @click="accept(r.id)" data-btn="btnAccept">Accept</button>
 							</td>
 							<td>
-								<button class="btn btn-danger" @click="refuse(r.id)">Refuse</button>
+								<button class="btn btn-danger" @click="refuse(r.id)" data-btn="btnRefuse">Refuse</button>
 							</td>
 						</tr>
 					</tbody>
