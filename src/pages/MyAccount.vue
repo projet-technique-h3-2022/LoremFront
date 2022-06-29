@@ -7,12 +7,17 @@ import MyRequestVue from "../components/MyRequest.vue";
 import MyGroupsVue from "../components/MyGroups.vue";
 import MyArticlesVue from "../components/MyArticles.vue";
 import EditorPublicationRequest from "../components/EditorPublicationRequest.vue";
+import AddEditArticleVue from "../components/AddEditArticle.vue";
 
 
 const { user } = useUserStore();
 const view = ref(0);
 
 function changeView(n) { view.value = n }
+
+function addArticle() {
+    view.value = 5
+}
 
 </script>
 
@@ -23,10 +28,12 @@ function changeView(n) { view.value = n }
             <div class="col-md-7 ms-5">
 
                 <UserInfo v-if="view == 0"/>
-                <MyArticlesVue v-if="view == 1" />
+                <MyArticlesVue v-if="view == 1" @add-article="addArticle" />
                 <MyGroupsVue v-if="view == 2"/>
                 <MyRequestVue v-if="view == 3" />
                 <EditorPublicationRequest v-if="view == 4" /> <!-- request pour editor -->
+                <!-- <MyRequestVue v-if="view == 4" /> --> <!-- request pour editor -->
+                <AddEditArticleVue v-if="view == 5" @article-added="view = 1" />
 
             </div>
         </div>

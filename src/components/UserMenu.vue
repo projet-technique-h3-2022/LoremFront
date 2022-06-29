@@ -7,11 +7,11 @@ const { user } = useUserStore();
     <div class="UserMenu col-md-3 leftContent">
         <h3>Menu utilisateur</h3>
         <ul>
-            <li @click="$emit('changeView', 0)">My informations</li>
-            <li @click="$emit('changeView', 1)" v-show="user.role == 'author'">My articles</li>
-            <li @click="$emit('changeView', 2)" v-show="user.role == 'editor'">My groups</li>
-            <li @click="$emit('changeView', 3)" v-show="user.role == 'author'">Publication requests</li>
-            <li @click="$emit('changeView', 4)" v-show="user.role == 'editor'">Publication requests</li>
+            <li @click="$emit('changeView', 0)" class="listBtn">My informations</li>
+            <li @click="$emit('changeView', 1)" v-show="user.role == 'author'" class="listBtn">My articles</li>
+            <li @click="$emit('changeView', 2)" v-show="user.role == 'editor'" class="listBtn">My groups</li>
+            <li @click="$emit('changeView', 3)" v-show="user.role == 'author'" class="listBtn">Publication requests</li>
+            <li @click="$emit('changeView', 4)" v-show="user.role == 'editor'" class="listBtn">Publication requests</li>
         </ul>
         <div class="separator"></div>
     </div>
@@ -27,6 +27,14 @@ ul {
 
 li {
     list-style-type: none;
+}
+
+.listBtn {
+    cursor: pointer;
+    transition: color .3s ease-in-out
+}
+.listBtn:hover {
+    color: palevioletred;
 }
 
 .leftContent {
