@@ -16,7 +16,10 @@ const articleId = ref("")
 
 function changeView(n) { view.value = n }
 
-const addArticle = () => view.value = 5
+const addArticle = () => {
+    view.value = 5
+    articleId.value = undefined
+}
 const editArticle = (id) => {
     view.value = 5
     articleId.value = id

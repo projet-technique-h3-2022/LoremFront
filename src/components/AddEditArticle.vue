@@ -36,13 +36,13 @@ const checkForm = () => {
     return !error
 }
 
-const verb = ref(props.articleId ? "Editer" : "Créer")
+const verb = ref(props.articleId ? "Edit" : "Create")
 
 const saveArticle = async () => {
     if(!checkForm()) return
     errorMsg.value = []
-    if(props.articleId == undefined) await postArticle({title: title.value, image: image.value, content: content.value})
-    else await putArticle({id: props.articleId, title: title.value, image: image.value, content: content.value})
+    if(props.articleId) await putArticle({id: props.articleId, title: title.value, image: image.value, content: content.value})
+    else await postArticle({title: title.value, image: image.value, content: content.value})
     emit('articleAdded')
 }
 
@@ -57,7 +57,7 @@ onMounted(async () => {
 
 <template>
     <div class="AddEditArticle">
-        <h1>{{ verb }} un article</h1>
+        <h1>{{ verb }} an article</h1>
         <input type="text" name="title" id="title" placeholder="Title" class="title" v-model="title">
         <input type="text" name="imageLink" id="imageLink" placeholder="Image link" class="imageLink" v-model="image">
         <textarea name="content" id="content" placeholder="Article content" class="content" rows="6" v-model="content"></textarea>
