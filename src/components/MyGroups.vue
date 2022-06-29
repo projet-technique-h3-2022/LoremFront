@@ -58,6 +58,7 @@ async function add(){
         form.value.response = await addUserGroup(data)
         if(form.value.response.title){
             form.value.response = ''
+            form.value.title.valid = false
             getData();
         } 
     }
@@ -74,6 +75,7 @@ async function update(){
 
         if(form.value.response.title){
             form.value.response = ''
+            form.value.title.valid = false
             getData();
         } 
     }
