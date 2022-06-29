@@ -20,9 +20,9 @@ const rows = [
 
 <template>
     <div class="MyArticles">
-        <div class="col-md-12 ms-5">
-            <h3>My articles</h3>
-            <button class="btn btn-primary mt-3">Add an article</button>
+        <div class="col-md-12">
+            <h1>My articles</h1>
+            <button class="btn btn-primary mt-3" @click="$emit('addArticle')">Add an article</button>
             <ArticleTableVue class="mt-5" :headList="headList" :rows="rows" />
         </div>
     </div>
