@@ -2,7 +2,9 @@
 import UserMenuVue from '../components/UserMenu.vue';
 import ArticleTableVue from '../components/ArticleTable.vue';
 import { getArticlesByAuthor } from '../services/article/article'
-import { onMounted, ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
+
+const emit = defineEmits(['editArticle'])
 
 const headList = [
     { id: "title", label: "Title" },
@@ -20,18 +22,18 @@ const headList = [
 
 const rows = ref([])
 
-const getAllArticles = async () => {
-    return await getArticlesByAuthor()
-}
+const getAllArticles = async () => await getArticlesByAuthor()
 
 const buildRows = (articles) => {
-    return articles.map((item, i) => ({title: item.title, group: "", status: item.published, actions: ["edit", (item.published_at) ? "publish" : "delete"]}))
+    return articles.map((item, i) => ({id: item._id, title: item.title, group: "", status: item.published, actions: ["edit", (item.published_at) ? "publish" : "delete"]}))
 }
 
 onMounted(async () => {
     const articles = await getAllArticles()
     rows.value = buildRows(articles)
 })
+
+const editArticle = (ev) => emit('editArticle', ev)
 </script>
 
 <template>
@@ -39,7 +41,7 @@ onMounted(async () => {
         <div class="col-md-12">
             <h1>My articles</h1>
             <button class="btn btn-primary mt-3" @click="$emit('addArticle')">Add an article</button>
-            <ArticleTableVue class="mt-5" :headList="headList" :rows="rows" />
+            <ArticleTableVue @edit="editArticle" class="mt-5" :headList="headList" :rows="rows" />
         </div>
     </div>
 </template>
