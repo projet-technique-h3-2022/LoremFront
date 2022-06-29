@@ -6,7 +6,7 @@ const { user } = useUserStore();
 <template>
     <div class="UserMenu col-md-3 leftContent">
         <h3>Menu utilisateur</h3>
-        <ul>
+        <ul class="mt-5 noselect">
             <li @click="$emit('changeView', 0)" class="listBtn">My informations</li>
             <li @click="$emit('changeView', 1)" v-show="user.role == 'author'" class="listBtn">My articles</li>
             <li @click="$emit('changeView', 2)" v-show="user.role == 'editor'" class="listBtn">My groups</li>
@@ -31,7 +31,8 @@ li {
 
 .listBtn {
     cursor: pointer;
-    transition: color .3s ease-in-out
+    transition: color .3s ease-in-out;
+    font-size: 16pt;
 }
 .listBtn:hover {
     color: palevioletred;
@@ -49,5 +50,15 @@ li {
     height: 100%;
     border-radius: 5px;
     background-color: palevioletred;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 </style>
