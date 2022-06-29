@@ -2,6 +2,8 @@ import axios from "axios";
 import { useUserStore } from "@/services/UserStore";
 const { UserLogin } = useUserStore();
 
+
+// Log the user in
 export async function login(form) {
   try {
     const result = await axios.post(import.meta.env.VITE_URL_API + "/user/login", {

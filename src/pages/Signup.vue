@@ -3,6 +3,7 @@ import { ref } from "vue";
 import router from "@/router";
 import { signup } from "@/services/authentication/Signup.js";
 
+// Data for the form, handle errors and response
 const form = ref({
 	lastname: {
 		value: "",
@@ -42,8 +43,10 @@ const form = ref({
 	response: ""
 })
 
+// Save form object (not the ref) for reset
 const saveForm = JSON.parse(JSON.stringify(form.value));
 
+// Function that validate the form
 function checkForm(type = "", min = 0, max = 0){
 	let elem
 	let str = ""
@@ -126,6 +129,7 @@ function checkForm(type = "", min = 0, max = 0){
 	return !error;
 }
 
+// Function validate the form and signup the user using the Signup service
 async function sendForm(){
 	let checkLastName = checkForm('lastname', 2, 50)
 	let checkFirstName = checkForm('firstname', 2, 50)
@@ -147,6 +151,7 @@ async function sendForm(){
 	}
 }
 
+// Function that reset the form
 function resetForm(){
 	form.value = JSON.parse(JSON.stringify(saveForm));
 }

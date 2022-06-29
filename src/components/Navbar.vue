@@ -4,6 +4,7 @@
 
   const { user, logout } = useUserStore();
 
+  // Function that logout the user using the UserStore service
   function logoutUser() {
     logout();
     router.push({ name: "homepage" });

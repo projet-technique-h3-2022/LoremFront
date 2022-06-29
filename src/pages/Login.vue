@@ -3,6 +3,7 @@ import { ref } from "vue";
 import router from "@/router";
 import { login } from "@/services/authentication/Login.js";
 
+// Data for the form, handle errors and response
 const form = ref({
 	email: {
 		value: "",
@@ -19,8 +20,10 @@ const form = ref({
 	response: ""
 })
 
+// Save form object (not the ref) for reset
 const saveForm = JSON.parse(JSON.stringify(form.value));
 
+// Function that validate the form
 function checkForm(type = "", min = 0, max = 0){
 	let elem
 	let error = false
@@ -67,6 +70,7 @@ function checkForm(type = "", min = 0, max = 0){
 	return !error;
 }
 
+// Function that validate the form and login the user using the Login service
 async function sendForm(){
 	let checkEmail = checkForm('email')
 	let checkPw = checkForm('password', 6, 255)
@@ -81,6 +85,7 @@ async function sendForm(){
 	}
 }
 
+// Function that reset the form
 function resetForm(){
 	form.value = saveForm;
 }

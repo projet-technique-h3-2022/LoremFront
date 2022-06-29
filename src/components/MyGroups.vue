@@ -29,7 +29,7 @@ function setModal(m, g = null) {
     } 
 }
 
-// Function who call group service to get all groups
+// Function that call group service to get all groups
 async function getData(){ groups.value = await getUserGroup(); }
 
 // Function that validate the form
@@ -49,7 +49,7 @@ function checkForm(){
 	return !error;
 }
 
-// Function who call group service to add a group
+// Function that call group service to add a group
 async function add(){
     if(checkForm()){
         let data = {
@@ -64,7 +64,7 @@ async function add(){
     }
 }
 
-// Function who call group service to update a group
+// Function that call group service to update a group
 async function update(){
     if(checkForm()){
         let data = {
@@ -81,7 +81,7 @@ async function update(){
     }
 }
 
-// Function who call group service to delete a group
+// Function that call group service to delete a group
 async function deleteGroup(groupId){
     form.value.response = await deleteUserGroup(groupId)
     if(form.value.response.title){
