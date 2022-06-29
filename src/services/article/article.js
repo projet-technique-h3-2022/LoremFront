@@ -1,5 +1,14 @@
 import axios from "axios";
 
+export async function getPublishedArticles(){
+  try {
+    const result = await axios.get(import.meta.env.VITE_URL_API + "/article");
+    return result.data;
+  } catch (err) {
+    return err.response.data.error;
+  }
+}
+
 export async function postArticle(article) {
   try {
     const result = await axios.post(import.meta.env.VITE_URL_API + "/article", {
