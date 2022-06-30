@@ -9,7 +9,7 @@ const props = defineProps({
 
 <template>
     <div class="UserMenu col-md-3 leftContent">
-        <h3>Menu utilisateur</h3>
+        <h3>User menu</h3>
         <ul class="mt-5 noselect">
             <li @click="$emit('changeView', 0)" :class="['listBtn', {active: view == 0}]">My informations</li>
             <li @click="$emit('changeView', 1)" v-show="user.role == 'author'" :class="['listBtn', {active: view == 1}]">My articles</li>

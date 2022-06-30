@@ -23,9 +23,9 @@ onMounted(async () => {
         <div class="articleContent">
             <div class="row">
                 <div class="col-md-3 leftContent">
-                    <div>Publié le {{(new Date(article?.published_at)).toLocaleDateString()}}</div>
-                    <div>Ecrit par {{article?.id_author?.firstname + " " + article?.id_author?.lastname}}</div>
-                    <div>Paru dans le groupe {{article?.id_group?.title}}</div>
+                    <div>Published at {{(new Date(article?.published_at)).toLocaleDateString()}}</div>
+                    <div>Wrote by {{article?.id_author?.firstname + " " + article?.id_author?.lastname}}</div>
+                    <div>Available at {{article?.id_group?.title}} group</div>
                 </div>
                 <div class="col-md-6 mainContent">
                     {{article.content}}
