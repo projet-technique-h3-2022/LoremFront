@@ -33,7 +33,7 @@ const selectedGroup = ref("")
 const getAllArticles = async () => await getArticlesByAuthor()
 
 const buildRows = (articles) => {
-    return articles.map((item, i) => ({ id: item._id, title: item.title, group: "", status: item.published, actions: ["edit", "delete", (item.published == "not_published") && "publish"] }))
+    return articles.map((item, i) => ({ id: item._id, title: item.title, group: item.id_group?.title, status: item.published, actions: ["edit", "delete", (item.published == "not_published") && "publish"] }))
 }
 
 const refresh = async () => {
