@@ -6,20 +6,26 @@ const { getUserEditorPubReq, editorAcceptPubReq, editorRefusePubReq} = useEditor
 
 const requests = ref([]);
 
-const response = ref({});
+const response = ref("");
 
 async function getData(){
-	// requests.value = await getUserEditorPubReq();
+	requests.value = await getUserEditorPubReq();
 }
 
 async function accept(requestId){
-	// response.value = await editorAcceptPubReq(requestId)
-	getData()
+	response.value = await editorAcceptPubReq(requestId)
+	if(response.value.id_article){
+		response.value = ""
+		getData()
+	}
 }
 
 async function refuse(requestId){
-	// response.value = await editorRefusePubReq(requestId)
-	getData()
+	response.value = await editorRefusePubReq(requestId)
+	if(response.value.id_article){
+		response.value = ""
+		getData()
+	}
 }
 
 getData();
@@ -30,6 +36,15 @@ getData();
 	<div>
 		<h3>Publication requests</h3>
 		<div class="row mt-5">
+
+			<!-- Error bloc, in case of an error during accept or refuse -->
+			<div class="col-12 mx-3" v-show="response != ''">
+					<div class="alert alert-danger">
+							<ul class="m-0">
+									<li>{{response}}</li>
+							</ul>
+					</div>
+			</div>
 			
 			<div v-show="requests.length > 0">
 				<table class="table">
