@@ -15,19 +15,18 @@ defineProps({
                                 
                         <h5 class="card-title">{{article.title}}</h5>
                         <p class="card-text">
-                            {{article.content.substring(0,255)+".."}}
+                            {{article.content.substring(0,250)+".."}}
                         </p>
 
                         <div class="row position-absolute bottom-0 pb-3 align-items-end">
                             <div class="col-12">
                                 <p class="card-text">
-                                    <small class="text-muted">Publication date : {{article.published_at}}</small>
+                                    <small class="text-muted">Publication date : {{ (new Date(article.published_at)).toLocaleDateString() }}</small>
                                 </p>
 
                                 <p class="card-text fs-6" v-if="article.id_group">
                                     Groupe : <span class="badge bg-info fs-6">{{article.id_group.title}}</span>
                                 </p>
-
                             </div>
                         </div>
                         

@@ -1,11 +1,9 @@
 <script setup>
 import { ref } from "vue";
 import { useEditorPubReq } from "@/services/EditorPublicationRequest.js";
+
 const { getUserEditorPubReq, editorAcceptPubReq, editorRefusePubReq} = useEditorPubReq();
-
-
 const requests = ref([]);
-
 const response = ref("");
 
 async function getData(){
@@ -27,8 +25,8 @@ async function refuse(requestId){
 		getData()
 	}
 }
-getData();
 
+getData();
 </script>
 
 <template>
