@@ -1,25 +1,47 @@
 <script setup>
-import ArticleTableVue from '../components/ArticleTable.vue';
+import { ref } from "vue"
+import { useAuthorPubReq } from "@/services/AuthorPublicationRequest.js"
 
-const headList = [
-    { id: "title", label: "Titre" },
-    { id: "group", label: "Groupe" },
-    { id: "status", label: "Statut" },
-]
-const rows = [
-    { title: "titre 1", group: "group 1", status: "draft", actions: ["add", "edit"] },
-    { title: "titre 1", group: "group 1", status: "draft", actions: ["add", "publish"] },
-    { title: "titre 1", group: "group 1", status: "draft", actions: ["edit", "publish"] },
-    { title: "titre 1", group: "group 1", status: "draft", actions: ["add", "edit"] },
-    { title: "titre 1", group: "group 1", status: "draft", actions: ["publish"] },
-    { title: "titre 1", group: "group 1", status: "draft", actions: ["add", "delete"] },
-]
+const { getUserAuthorPubReq, authorCancelPubReq } = useAuthorPubReq()
+
+const requests = ref([])
+const res = ref("")
+
+async function getData(){
+    requests.value = await getUserAuthorPubReq()
+}
+async function deleteRequest(requestId){
+    res.value = await authorCancelPubReq(requestId)
+    console.log(res.value);
+}
+
+getData()
 </script>
 
 <template>
     <div class="MyRequest">
-        <h1>Mes demandes de publication</h1>
-        <button class="btn btn-primary">Nouvelle demande</button>
-        <ArticleTableVue class="mt-5" :headList="headList" :rows="rows" />
+        <h1>My publication requests</h1>
+        <table class="table mt-3" v-show="requests.length > 0">
+            <thead>
+                <tr>
+                    <th>Article title</th>
+                    <th>Article title</th>
+                    <th>Date of request</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="r in requests">
+                    <td>{{r.id_article.title}}</td>
+                    <td>{{r.id_group.title}}</td>
+                    <td>{{r.requested_at}}</td>
+                    <td><button class="btn btn-danger" @click="deleteRequest">Cancel</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="text-center mt-5" v-show="requests.length == 0">
+            You don't have any pending publication requests
+        </div>
     </div>
 </template>
