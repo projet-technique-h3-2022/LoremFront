@@ -15,7 +15,7 @@ defineProps({
                                 
                         <h5 class="card-title">{{article.title}}</h5>
                         <p class="card-text">
-                            {{article.content.substring(0,250)+".."}}
+                            {{article.content.substring(0,200)+".."}}
                         </p>
 
                         <div class="row position-absolute bottom-0 pb-3 align-items-end">
@@ -44,9 +44,12 @@ defineProps({
 
 .minHeight{
     min-height: 240px;
+    max-height: 240px;
 }
 
 img {
     object-fit: cover;
+    height: 100%;
+    max-height: 240px;
 }
 </style>
