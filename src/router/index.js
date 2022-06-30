@@ -1,9 +1,51 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import HomeView from '../views/HomeView.vue'
+import Signup from '@/pages/Signup.vue'
+import Login from '@/pages/Login.vue'
+import HomePage from '../pages/HomePage.vue'
+import ReadArticle from '../pages/ReadArticle.vue'
+import MyAccount from '../pages/MyAccount.vue'
+
+import { useUserStore } from "@/services/UserStore";
+const { user } = useUserStore();
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: []
+  history: createWebHistory(),
+  routes: [
+    {
+      path: "/",
+      name: 'homepage',
+      component: HomePage,
+    },
+    {
+      path: "/signup",
+      name: "signup",
+      component: Signup,
+      beforeEnter: function () {
+        if (user.value) return { name: "homepage" };
+      },
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: Login,
+      beforeEnter: function () {
+        if (user.value) return { name: "homepage" };
+      },
+    },
+    {
+      path: "/readArticle/:id",
+      name: 'readArticle',
+      component: ReadArticle,
+    },
+    {
+      path: "/myAccount",
+      name: 'myAccount',
+      component: MyAccount,
+      beforeEnter: function () {
+        if (!user.value) return { name: "homepage" };
+      },
+    },
+  ]
 })
 
 export default router
