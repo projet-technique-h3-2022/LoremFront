@@ -5,14 +5,18 @@ import { useAuthorPubReq } from "@/services/AuthorPublicationRequest.js"
 const { getUserAuthorPubReq, authorCancelPubReq } = useAuthorPubReq()
 
 const requests = ref([])
-const res = ref("")
+const response = ref("")
 
 async function getData(){
     requests.value = await getUserAuthorPubReq()
 }
+
 async function deleteRequest(requestId){
-    res.value = await authorCancelPubReq(requestId)
-    console.log(res.value);
+    response.value = await authorCancelPubReq(requestId)
+    if(response.value._id){
+        response.value = '';
+        getData()
+    }
 }
 
 getData()
@@ -34,8 +38,8 @@ getData()
                 <tr v-for="r in requests">
                     <td>{{r.id_article.title}}</td>
                     <td>{{r.id_group.title}}</td>
-                    <td>{{r.requested_at}}</td>
-                    <td><button class="btn btn-danger" @click="deleteRequest">Cancel</button></td>
+                    <td>{{ (new Date(r.requested_at)).toLocaleString() }}</td>
+                    <td><button class="btn btn-danger" @click="deleteRequest(r._id)" data-btn="btnCancel">Cancel</button></td>
                 </tr>
             </tbody>
         </table>
