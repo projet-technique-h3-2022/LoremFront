@@ -1,5 +1,14 @@
 import axios from "axios";
 
+async function getAllGroups() {
+  try {
+    const result = await axios.get(import.meta.env.VITE_URL_API + "/group");
+		return result.data;
+  } catch (err) {
+    return err.response.data.error;
+  }
+}
+
 // Return the list of group owned by the user
 async function getUserGroup() {
   try {
@@ -47,6 +56,7 @@ async function deleteUserGroup(groupId) {
 // Export all functions
 export function useGroups() {
   return {
+    getAllGroups,
     getUserGroup,
 		addUserGroup,
 		updateUserGroup,
