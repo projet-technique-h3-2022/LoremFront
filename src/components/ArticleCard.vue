@@ -25,7 +25,7 @@ defineProps({
                                 </p>
 
                                 <p class="card-text fs-6" v-if="article.id_group">
-                                    Groupe : <span class="badge bg-info fs-6">{{article.id_group.title}}</span>
+                                    Group : <span class="badge bg-info fs-6">{{article.id_group.title}}</span>
                                 </p>
                             </div>
                         </div>
