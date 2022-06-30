@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue';
 import router from "@/router";
 import UserMenuVue from '../components/UserMenu.vue';
-import { postArticle, getArticleById, putArticle } from '../services/article/article'
+import { postArticle, getArticleById, putArticle } from '../services/article'
 
 const props = defineProps({
     articleId: {

@@ -1,7 +1,7 @@
 <script setup>
 import UserMenuVue from '../components/UserMenu.vue';
 import ArticleTableVue from '../components/ArticleTable.vue';
-import { getArticlesByAuthor, deleteArticleById } from '../services/article/article'
+import { getArticlesByAuthor, deleteArticleById } from '../services/article'
 import { useGroups } from '../services/groups.js'
 import { useAuthorPubReq } from '../services/AuthorPublicationRequest';
 import { onMounted, onUnmounted, ref } from 'vue';

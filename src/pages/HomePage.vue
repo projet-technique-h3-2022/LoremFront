@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed } from "@vue/reactivity";
 import ArticleCardVue from "@/components/ArticleCard.vue";
-import { getPublishedArticles } from "@/services/article/article" 
+import { getPublishedArticles } from "@/services/article" 
 
 const articles = ref([])
 

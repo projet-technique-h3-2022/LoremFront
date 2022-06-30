@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
-import { getArticleById } from '../services/article/article';
+import { getArticleById } from '../services/article';
 
 const route = useRoute()
 const articleId = ref("")
