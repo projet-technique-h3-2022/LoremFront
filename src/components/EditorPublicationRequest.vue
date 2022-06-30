@@ -27,7 +27,6 @@ async function refuse(requestId){
 		getData()
 	}
 }
-
 getData();
 
 </script>
@@ -58,17 +57,17 @@ getData();
 						</tr>
 					</thead>
 					<tbody>
-						<tr v-for="r in requests">
-							<td>{{r.group.title}}</td>
+						<tr v-for="r in requests" class="align-middle">
+							<td>{{r.id_group.title}}</td>
 							<td>
-								<a :href="'/readArticle/' + r.article.id" target="_blank">{{r.article.title}}</a>
+								<a :href="'/readArticle/' + r.id_article._id" target="_blank">{{r.id_article.title}}</a>
 							</td>
-							<td>{{r.requested_at}}</td>
+							<td>{{(new Date(r.requested_at)).toLocaleString()}}</td>
 							<td>
-								<button class="btn btn-success" @click="accept(r.id)" data-btn="btnAccept">Accept</button>
+								<button class="btn btn-success" @click="accept(r._id)" data-btn="btnAccept">Accept</button>
 							</td>
 							<td>
-								<button class="btn btn-danger" @click="refuse(r.id)" data-btn="btnRefuse">Refuse</button>
+								<button class="btn btn-danger" @click="refuse(r._id)" data-btn="btnRefuse">Refuse</button>
 							</td>
 						</tr>
 					</tbody>
