@@ -1,12 +1,10 @@
 <script setup>
 import { ref } from "vue";
-// import { useEditorPubReq } from "@/services/EditorPublicationRequest.js";
-// const { getUserEditorPubReq, editorAcceptPubReq, editorRefusePubReq} = useEditorPubReq();
+import { useEditorPubReq } from "@/services/EditorPublicationRequest.js";
+const { getUserEditorPubReq, editorAcceptPubReq, editorRefusePubReq} = useEditorPubReq();
 
 
-const requests = ref([
-	{id: 0, article: {id: 0, title: "test"}, group: {title: "test"}, requested_at: '0000-00-00'}
-]);
+const requests = ref([]);
 
 const response = ref({});
 
