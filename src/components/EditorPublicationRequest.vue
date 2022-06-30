@@ -58,7 +58,9 @@ getData();
 						<tr v-for="r in requests" class="align-middle">
 							<td>{{r.id_group.title}}</td>
 							<td>
-								<a :href="'/readArticle/' + r.id_article._id" target="_blank">{{r.id_article.title}}</a>
+								<router-link :to="'/readArticle/' + r.id_article._id">
+									{{r.id_article.title}}
+								</router-link>
 							</td>
 							<td>{{(new Date(r.requested_at)).toLocaleString()}}</td>
 							<td>

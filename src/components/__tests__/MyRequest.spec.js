@@ -1,4 +1,4 @@
-import EditorPublicationRequest from '@/components/EditorPublicationRequest.vue'
+import MyRequest from '@/components/MyRequest.vue'
 import { mount } from '@vue/test-utils'
 import { describe, it } from 'vitest';
 import { rest } from "msw";
@@ -23,15 +23,7 @@ const mockedServer = setupServer(
     }
   ),
 	rest.delete(
-		import.meta.env.VITE_URL_API + "/request/:id/valid",
-		(req, res, ctx) => {
-      return res(
-        ctx.json({"_id":"0","id_article":"1","id_group":"2"})
-      );
-    }
-	),
-	rest.delete(
-		import.meta.env.VITE_URL_API + "/request/:id/refuse",
+		import.meta.env.VITE_URL_API + "/request/:id/cancel",
 		(req, res, ctx) => {
       return res(
         ctx.json({"_id":"0","id_article":"1","id_group":"2"})
@@ -40,13 +32,13 @@ const mockedServer = setupServer(
 	),
 );
 
-describe("Component EditorPublicationRequest", () => {
+describe("Component MyRequest", () => {
 
 	let wrapper
 
 	beforeAll(async () => {
 		mockedServer.listen()
-		wrapper = mount(EditorPublicationRequest);
+		wrapper = mount(MyRequest);
 	})
 	afterAll(() => {
 		wrapper.unmount()
@@ -54,8 +46,8 @@ describe("Component EditorPublicationRequest", () => {
 	})
 
 	it("Render title", () => {
-		const [h3] = wrapper.findAll('h3');
-		expect(h3.text()).toMatch(/Publication requests/);
+		const [h3] = wrapper.findAll('h1');
+		expect(h3.text()).toMatch(/My publication requests/);
 	});
 
 	it("On Mount - Data not empty", async () => {
@@ -66,16 +58,9 @@ describe("Component EditorPublicationRequest", () => {
 		]);
 	})
 
-	it("Accept Publucation Request", () => {
-		const btnAccept = wrapper.findAll('[data-btn="btnAccept"]')[0];
+	it("Cancel Publication Request", () => {
+		const btnAccept = wrapper.findAll('[data-btn="btnCancel"]')[0];
 		btnAccept.trigger("click");
-		sleep(300);
-		expect(wrapper.vm.response).toBe("");
-	});
-
-	it.skip("Accept Publucation Request", () => {
-		const btnRefuse = wrapper.findAll('[data-btn="btnRefuse"]')[0];
-		btnRefuse.trigger("click");
 		sleep(300);
 		expect(wrapper.vm.response).toBe("");
 	});

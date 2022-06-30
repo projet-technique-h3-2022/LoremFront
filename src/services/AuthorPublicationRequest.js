@@ -23,7 +23,7 @@ async function addPubReq(form){
 
 async function authorCancelPubReq(requestId = 0){
 	try {
-    const result = await axios.get(import.meta.env.VITE_URL_API + "/request/" + requestId + "/cancel");
+    const result = await axios.delete(import.meta.env.VITE_URL_API + "/request/" + requestId + "/cancel");
 		return result.data;
   } catch (err) {
     return err.response.data.error;
