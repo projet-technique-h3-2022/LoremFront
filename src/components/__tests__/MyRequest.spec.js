@@ -59,8 +59,8 @@ describe("Component MyRequest", () => {
 	})
 
 	it("Cancel Publication Request", () => {
-		const btnAccept = wrapper.findAll('[data-btn="btnCancel"]')[0];
-		btnAccept.trigger("click");
+		const btnCancel = wrapper.findAll('[data-btn="btnCancel"]')[0];
+		btnCancel.trigger("click");
 		sleep(300);
 		expect(wrapper.vm.response).toBe("");
 	});

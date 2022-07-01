@@ -73,7 +73,7 @@ describe("Component EditorPublicationRequest", () => {
 		expect(wrapper.vm.response).toBe("");
 	});
 
-	it.skip("Accept Publucation Request", () => {
+	it("Accept Publucation Request", () => {
 		const btnRefuse = wrapper.findAll('[data-btn="btnRefuse"]')[0];
 		btnRefuse.trigger("click");
 		sleep(300);

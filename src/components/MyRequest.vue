@@ -29,7 +29,7 @@ getData()
             <thead>
                 <tr>
                     <th>Article title</th>
-                    <th>Article title</th>
+                    <th>Group title</th>
                     <th>Date of request</th>
                     <th></th>
                 </tr>
